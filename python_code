@@ -1,0 +1,10 @@
+'''
+Name: Keanu Valencia
+Date: 6/21/24
+
+'''
+
+# Imports the Libaries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
