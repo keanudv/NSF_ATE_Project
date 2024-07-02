@@ -28,17 +28,15 @@ df.info() #The info() function shows the data type of each column.
 df.describe() #The describe() function shows summary statistics for numerical columns/quantitative data.
 
 '''
-Upon analyzing the data types using the describe() function, it shows that Python is not interpreting the Original Price and Price columns as quantitative data.
+Upon analyzing the data types using the info() function, it shows that Python is not interpreting the Original Price and Price columns as quantitative data.
 The reason is because the Original Price and Price column is formatted in Accouting ($) on Excel.
 Python interperts the $ as a String data type.
 To fix this issue, I have to adjust the formatting in Excel.
 Once the formatting is fixed, I can use the info() function to see if Python now interprerts the Original Price and Price columns as quantitative data.
 '''
 
-df.info()
-
-# Get summary statistics on the Original Price and Price columns
-df.describe()
+df.info() #Python should interpret the Original Price and Price columns as quantitative data (int or float).
+df.describe() #Get summary statistics on the Original Price and Price columns.
 
 # Check for missing values
 df.isnull().sum()
@@ -56,6 +54,6 @@ This means that missing price values are associated with canceled property listi
 Therefore, we can drop the 4 rows in the Price column that have nulls.
 '''
 
-# Creates a new data frame (clean_df) that contains no nulls in the Price column.
+# Creates a new data frame (clean_df) that contains no nulls in the Price column
 clean_df = df.dropna(subset = ["Price"])
-clean_df.isnull().sum()
+clean_df.isnull().sum() #The Price column should have 0 nulls.
