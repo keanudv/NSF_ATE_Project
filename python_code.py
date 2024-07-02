@@ -23,3 +23,10 @@ df = pd.read_csv(file_location, encoding="UTF-8")
 # View the data
 df.head(10)
 df.tail(10)
+
+# Initial Exploratory Data Analysis (EDA)
+df.shape #The Shape function shows how many rows and columns the data set has.
+
+df.info() #The info function shows the data type of each column.
+
+df.describe() #The describe function shows summary statistics for numerical columns/quantitative data.
