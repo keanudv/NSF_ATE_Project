@@ -36,3 +36,13 @@ Upon analyzing the data type, it seems that Python is not treating the Original 
 The reason is because the Original Price and Price column is formatted in Accouting ($ at the beginning).
 Python interperts the $ as a String data type. Therefore, to fix this issue, I have to adjust the formatting in Excel.
 '''
+
+# Once the formatting is adjusted, I can use the info function to see if Python interprets the Original Price and Price columns as quantitative data (int or float).
+df.info()
+
+# Now I can get summary statistics on the Original Price and Price columns.
+df.describe()
+
+
+
+
