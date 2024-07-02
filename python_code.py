@@ -47,7 +47,7 @@ df.describe()
 df.isnull.sum()
 
 '''
-The Price column as 4 nulls.
+The Price column has 4 nulls.
 Because I am going to do an analysis on the Price column, I have to dig deep into why the values are missing. 
 '''
 
