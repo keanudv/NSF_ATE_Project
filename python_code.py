@@ -1,7 +1,6 @@
 '''
 Name: Keanu Valencia
 Date: 06/21/2024
-
 '''
 
 # Imports the libraries
@@ -25,24 +24,41 @@ df.head(10)
 df.tail(10)
 
 # Initial Exploratory Data Analysis (EDA)
-df.shape #The Shape function shows how many rows and columns the data set has.
+df.shape #The shape function shows how many rows and columns the data set has.
 
 df.info() #The info function shows the data type of each column.
 
 df.describe() #The describe function shows summary statistics for numerical columns/quantitative data.
 
 '''
-Upon analyzing the data type, it seems that Python is not treating the Original Price and Price columns as quantitative data.
+Upon analyzing the data type, it seems that Python is not interpreting the Original Price and Price columns as quantitative data.
 The reason is because the Original Price and Price column is formatted in Accouting ($ at the beginning).
-Python interperts the $ as a String data type. Therefore, to fix this issue, I have to adjust the formatting in Excel.
+Python interperts the $ as a String data type.
+Therefore, to fix this issue, I have to adjust the formatting in Excel.
 '''
 
-# Once the formatting is adjusted, I can use the info function to see if Python interprets the Original Price and Price columns as quantitative data (int or float).
+# Once the formatting is adjusted, I can use the info function to see if Python interprets the Original Price and Price columns as quantitative data (int or float)
 df.info()
 
-# Now I can get summary statistics on the Original Price and Price columns.
+# Now I can get summary statistics on the Original Price and Price columns
 df.describe()
 
+# Check for missing values
+df.isnull.sum()
 
+'''
+The Price column has 4 nulls.
+Because I am going to do an analysis on the Price column, I have to dig deep into why the values are missing. 
+'''
 
+print(df[df["Price"].isnull()]) #This code shows the rows of the Price column that have nulls.
 
+'''
+Upon analyzing the nulls in the price column, it shows that the Status of the propery listing is canceled.
+This means that missing price values are associated with canceled property listings.
+Therefore, we can drop the 4 rows in the Price column that have nulls.
+'''
+
+# Creates a new data frame (clean_df) that contains no nulls in the Price column.
+clean_df = df.dropna(subset = ["Price"])
+clean_df.isnull().sum()
