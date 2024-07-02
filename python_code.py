@@ -40,18 +40,18 @@ Therefore, to fix this issue, I have to adjust the formatting in Excel.
 # Once the formatting is adjusted, I can use the info function to see if Python interprets the Original Price and Price columns as quantitative data (int or float)
 df.info()
 
-# Now I can get summary statistics on the Original Price and Price columns
+# Now, I can get summary statistics on the Original Price and Price columns
 df.describe()
 
 # Check for missing values
-df.isnull.sum()
+df.isnull().sum()
 
 '''
 The Price column has 4 nulls.
 Because I am going to do an analysis on the Price column, I have to dig deep into why the values are missing. 
 '''
 
-print(df[df["Price"].isnull()]) #This code shows the rows of the Price column that have nulls.
+print(df[df["Price"].isnull()]) #This code shows the rows of the Price column that contain missing values.
 
 '''
 Upon analyzing the nulls in the price column, it shows that the Status of the propery listing is canceled.
