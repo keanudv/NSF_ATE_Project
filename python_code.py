@@ -30,3 +30,9 @@ df.shape #The Shape function shows how many rows and columns the data set has.
 df.info() #The info function shows the data type of each column.
 
 df.describe() #The describe function shows summary statistics for numerical columns/quantitative data.
+
+'''
+Upon analyzing the data type, it seems that Python is not treating the Original Price and Price columns as quantitative data.
+The reason is because the Original Price and Price column is formatted in Accouting ($ at the beginning).
+Python interperts the $ as a String data type. Therefore, to fix this issue, I have to adjust the formatting in Excel.
+'''
