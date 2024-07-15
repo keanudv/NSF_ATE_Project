@@ -57,3 +57,19 @@ Therefore, we can drop the 4 rows in the Price column that have nulls.
 # Creates a new data frame (clean_df) that contains no nulls in the Price column
 clean_df = df.dropna(subset = ["Price"])
 clean_df.isnull().sum() #The Price column should have 0 nulls.
+
+# Selects only the needed columns
+columns = [
+  "Status",
+  "Type",
+  "Original Price",
+  "Price",
+  "List Date",
+  "Price Date",
+  "Days On Market"
+]
+
+# Creates a new data frame (new_df) that contains only the needed columns using the clean data frame.
+new_df = clean_df[columns]
+new_df.shape #Verify that the number of columns is equal to the number of selected columns.
+new_df.isnull().sum() #Verify that there are no nulls in the new dataframe.
