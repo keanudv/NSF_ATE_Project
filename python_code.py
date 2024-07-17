@@ -146,4 +146,16 @@ barplot("Type", "Number of Sales", type_group, "Number of Sales by Property Type
 '''
 Upon analyzing the first barplot, it shows that the Kihei distrcit had the most sales (around 1,400).
 Upon analyzing the second barplot, it shows that Condo property types had the most sales (around 2,600).
+With this information, now I want to see how many of those Kihei sales were Condos.
+'''
+
+# Filter the sold properties to include only Condo properties that are located in Kihei
+kihei_condos = sold_properties[(sold_properties["District"]=="Kihei") & (sold_properties["Type"]=="Condo")]
+
+# Count the number of Kihei condo sales
+kihei_condo_count = kihei_condos.shape[0]
+print(kihei_condo_count)
+
+'''
+Of the 1,400+ properties that sold in Kihei, 1,049 of them were Condos.
 '''
