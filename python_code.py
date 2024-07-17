@@ -74,3 +74,58 @@ final_df.shape
 # Verify that there are no nulls in the new dataframe
 final_df.isnull().sum()
 
+# Creates a function for scatterplots that will make data visualizations easier
+import matplotlib.ticker as ticker
+def scatterplot(x, y, d, title):
+  '''
+  This function creates a scatterplot that shows the relationship between two variables.
+
+  Parameters:
+  x: The x parameter is the name for the first variable.
+  y: The y parameter is the name for the second variable.
+  d: The d parameter is the name for the data frame.
+  title: The title parameter is the name for the title of the scatter plot.
+  '''
+  sns.scatterplot(x=x, y=y, data=d)
+  plt.title(title, fontsize=20)
+  plt.xlabel(x, fontsize=14)
+  plt.gca().xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+  plt.xticks(rotation=45, ha="right")
+  plt.ylabel(y, fontsize=14)
+  plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
+  plt.show()
+
+# Creates a function for boxplots that will make visualizations easier
+def boxplot(x, y, d, title):
+  '''
+  This function creates a scatterplot that shows the relationship between two variables.
+
+  Parameters:
+  Uses the same parameters as the scatterplot function.
+  '''
+  sns.boxplot(x=x, y=y, data=d)
+  plt.title(title, fontsize=20)
+  plt.xlabel(x, fontsize=14)
+  plt.xticks(rotation=75, ha="right", fontsize=8)
+  plt.subplots_adjust(bottom=0.3)
+  plt.ylabel(y, fontsize=14)
+  plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
+  plt.show()
+
+# Creates a function for bargraphs that will make visualizations easier
+def barplot(x, y, d, title):
+  '''
+  This function creates a scatterplot that shows the relationships between two variables.
+  
+  Parameters:
+  Uses the same parameters as the scatterplot function.
+  '''
+  sns.barplot(x=x, y=y, data=d)
+  plt.title(title, fontsize=20)
+  plt.xlabel(x, fontsize=14)
+  plt.xticks(rotation=75, ha="right", fontsize=8)
+  plt.subplots_adjust(bottom=0.3)
+  plt.ylabel(y, fontsize=14)
+  plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
+  plt.show()
+
