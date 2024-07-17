@@ -60,6 +60,7 @@ columns = [
   "Type",
   "Original Price",
   "Price",
+  "District",
   "List Date",
   "Price Date",
   "Days On Market"
@@ -68,7 +69,7 @@ columns = [
 # Creates a new data frame (final_df) that contains only the needed columns using the clean data frame.
 final_df = clean_df[columns]
 
-# Verify that the number of columns is equal to the number of selected columns (7)
+# Verify that the number of columns is equal to the number of selected columns (8)
 final_df.shape
 
 # Verify that there are no nulls in the new dataframe
@@ -129,3 +130,19 @@ def barplot(x, y, d, title):
   plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
   plt.show()
 
+'''
+The first question I want to answer is which district had the most sales. To do this, I will create a barplot using my barplot function.
+'''
+
+# Filter the Status column to include only sold properties
+sold_properties = final_df[final_df["Status"]=="SOLD"]
+
+# Group by district and count the number of sold properties
+district_group = sold_properties.groupby("District").size().reset_index(name="Number of Properties Sold")
+
+# Create the barplot
+barplot("District", "Number of Properties Sold", district_group, "Number of Sales by District")
+
+'''
+Upon analyzing the barplot, it shows that Kihei had the most sales (1,400).
+'''
