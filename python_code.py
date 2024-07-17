@@ -3,7 +3,7 @@ Name: Keanu Valencia
 Date: 06/21/2024
 '''
 
-# Imports the libraries
+# Import the libraries
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -18,25 +18,14 @@ Also, you must have the data set in CSV format for the Pandas read_csv() functio
 Also, know what character encoding the data set is using. For my project, the data set is in CSV UTF-8.
 '''
 
-# View the data
-df.head(10)
-df.tail(10)
+# See the first and last 5 rows of the data set
+df.head()
+df.tail()
 
 # Exploratory Data Analysis (EDA)
 df.shape #The shape function shows how many rows and columns the data set has.
 df.info() #The info() function shows the data type of each column.
 df.describe() #The describe() function shows summary statistics for numerical columns/quantitative data.
-
-'''
-Upon analyzing the data types using the info() function, it shows that Python is not interpreting the Original Price and Price columns as quantitative data.
-The reason is because the Original Price and Price column is formatted in Accouting ($) on Excel.
-Python interperts the $ as a String data type.
-To fix this issue, I have to adjust the formatting in Excel.
-Once the formatting is fixed, I can use the info() function to see if Python now interprerts the Original Price and Price columns as quantitative data.
-'''
-
-df.info() #Python should interpret the Original Price and Price columns as quantitative data (int or float).
-df.describe() #Get summary statistics on the Original Price and Price columns.
 
 # Check for missing values
 df.isnull().sum()
@@ -56,9 +45,16 @@ Therefore, we can drop the 4 rows in the Price column that have nulls.
 
 # Creates a new data frame (clean_df) that contains no nulls in the Price column
 clean_df = df.dropna(subset = ["Price"])
-clean_df.isnull().sum() #Verify that there are no nulls in the Price column.
 
-# Selects only the needed columns
+# Verify that there are no nulls in the Price column for the new data frame
+clean_df.isnull().sum()
+
+'''
+For this project, I will only use the Status, Type, Original Price, Price, List Date, Price Date, and Days On Market variables.
+Therefore, we must create a final data frame that contains only the needed columns.
+'''
+
+# Select only the needed columns
 columns = [
   "Status",
   "Type",
@@ -71,5 +67,10 @@ columns = [
 
 # Creates a new data frame (final_df) that contains only the needed columns using the clean data frame.
 final_df = clean_df[columns]
-final_df.shape #Verify that the number of columns is equal to the number of selected columns (7).
-final_df.isnull().sum() #Verify that there are no nulls in the new dataframe.
+
+# Verify that the number of columns is equal to the number of selected columns (7)
+final_df.shape
+
+# Verify that there are no nulls in the new dataframe
+final_df.isnull().sum()
+
