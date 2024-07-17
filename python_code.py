@@ -12,12 +12,6 @@ import seaborn as sns
 file_location = "C:\\Users\\keanu\\OneDrive\\Desktop\\Hotsheet_spreadsheet_version.csv"
 df = pd.read_csv(file_location, encoding="UTF-8")
 
-'''
-Note that you have to use double backslashes (\\) for the Pandas read_csv() function to work properly.
-Also, you must have the data set in CSV format for the Pandas read_csv() function to work properly.
-Also, know what character encoding the data set is using. For my project, the data set is in CSV UTF-8.
-'''
-
 # See the first and last 5 rows of the data set
 df.head()
 df.tail()
@@ -40,7 +34,7 @@ print(df[df["Price"].isnull()]) #This code shows the rows of the Price column th
 '''
 Upon analyzing the nulls in the price column, it shows that the Status of the propery listing is canceled.
 This means that missing price values are associated with canceled property listings.
-Therefore, we can drop the 4 rows in the Price column that have nulls.
+Therefore, I can drop the 4 rows in the Price column that have nulls.
 '''
 
 # Creates a new data frame (clean_df) that contains no nulls in the Price column
@@ -50,8 +44,8 @@ clean_df = df.dropna(subset = ["Price"])
 clean_df.isnull().sum()
 
 '''
-For this project, I will only use the Status, Type, Original Price, Price, List Date, Price Date, and Days On Market variables.
-Therefore, we must create a final data frame that contains only the needed columns.
+For this project, I will only use the Status, Type, Original Price, Price, District, List Date, Price Date, and Days On Market variables.
+Therefore, I must create a final data frame that contains only the needed columns.
 '''
 
 # Select only the needed columns
@@ -91,7 +85,7 @@ def scatterplot(x, y, d, title):
   plt.title(title, fontsize=20)
   plt.xlabel(x, fontsize=14)
   plt.gca().xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
-  plt.xticks(rotation=45, ha="right")
+  plt.xticks(rotation=75, ha="right")
   plt.ylabel(y, fontsize=14)
   plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
   plt.show()
@@ -113,10 +107,10 @@ def boxplot(x, y, d, title):
   plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
   plt.show()
 
-# Creates a function for bargraphs that will make visualizations easier
+# Creates a function for barplots that will make visualizations easier
 def barplot(x, y, d, title):
   '''
-  This function creates a scatterplot that shows the relationships between two variables.
+  This function creates a barplot that shows the relationships between two variables.
   
   Parameters:
   Uses the same parameters as the scatterplot function.
