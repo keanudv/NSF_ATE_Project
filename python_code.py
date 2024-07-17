@@ -125,18 +125,25 @@ def barplot(x, y, d, title):
   plt.show()
 
 '''
-The first question I want to answer is which district had the most sales. To do this, I will create a barplot using my barplot function.
+The first questions I want to answer is which district and property type had the most sales. To do this, I will create a barplot using my barplot function.
 '''
 
 # Filter the Status column to include only sold properties
 sold_properties = final_df[final_df["Status"]=="SOLD"]
 
-# Group by district and count the number of sold properties
-district_group = sold_properties.groupby("District").size().reset_index(name="Number of Properties Sold")
+# Group by District and count the number of sold properties
+district_group = sold_properties.groupby("District").size().reset_index(name="Number of Sales")
 
-# Create the barplot
-barplot("District", "Number of Properties Sold", district_group, "Number of Sales by District")
+# Create the barplot to see which district had the most sales
+barplot("District", "Number of Sales", district_group, "Number of Sales by District")
+
+# Group by Type and count the number of sold properties
+type_group = sold_properties.groupby("Type").size().reset_index(name="Number of Sales")
+
+# Create the barplot to see which property type had the most sales
+barplot("Type", "Number of Sales", type_group, "Number of Sales by Property Type")
 
 '''
-Upon analyzing the barplot, it shows that Kihei had the most sales (1,400).
+Upon analyzing the first barplot, it shows that the Kihei distrcit had the most sales (around 1,400).
+Upon analyzing the second barplot, it shows that Condo property types had the most sales (around 2,600).
 '''
