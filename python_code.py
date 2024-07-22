@@ -16,7 +16,7 @@ df = pd.read_csv(file_location, encoding="UTF-8")
 df.head()
 df.tail()
 
-# Exploratory Data Analysis (EDA)
+# Exploratory data analysis (EDA)
 df.shape #The shape function shows how many rows and columns the data set has.
 df.info() #The info() function shows the data type of each column.
 df.describe() #The describe() function shows summary statistics for numerical columns/quantitative data.
@@ -29,7 +29,8 @@ Upon analyzing the missing values using the isnull().sum() function, it shows th
 Because I am going to do an analysis on the Price column, I have to dig deep into why the values are missing.
 '''
 
-print(df[df["Price"].isnull()]) #This code shows the rows of the Price column that contain missing values.
+# Show the rows of the Price column that contain missing values
+print(df[df["Price"].isnull()])
 
 '''
 Upon analyzing the nulls in the price column, it shows that the Status of the propery listing is canceled.
@@ -76,10 +77,10 @@ def scatterplot(x, y, d, title):
   This function creates a scatterplot that shows the relationship between two variables.
 
   Parameters:
-  x: The x parameter is the name for the first variable.
-  y: The y parameter is the name for the second variable.
-  d: The d parameter is the name for the data frame.
-  title: The title parameter is the name for the title of the scatter plot.
+  x: The value for the x-axis.
+  y: The value for the y-axis.
+  d: The value for the data to plot.
+  title: The value for the title of the graph.
   '''
   sns.scatterplot(x=x, y=y, data=d)
   plt.title(title, fontsize=20)
@@ -93,7 +94,7 @@ def scatterplot(x, y, d, title):
 # Creates a function for boxplots that will make visualizations easier
 def boxplot(x, y, d, title):
   '''
-  This function creates a scatterplot that shows the relationship between two variables.
+  This function creates a boxplot that shows the relationships between two variables.
 
   Parameters:
   Uses the same parameters as the scatterplot function.
@@ -144,8 +145,7 @@ type_group = sold_properties.groupby("Type").size().reset_index(name="Number of 
 barplot("Type", "Number of Sales", type_group, "Number of Sales by Property Type")
 
 '''
-Upon analyzing the first barplot, it shows that the Kihei distrcit had the most sales (around 1,400).
-Upon analyzing the second barplot, it shows that Condo property types had the most sales (around 2,600).
+The barplots show that the Kihei district (more than 1,400) and Condo property types (more than 2,600) had the most sales.
 With this information, now I want to see how many of those Kihei sales were Condos.
 '''
 
@@ -158,4 +158,28 @@ print(kihei_condo_count)
 
 '''
 Of the 1,400+ properties that sold in Kihei, 1,049 of them were Condos.
+The next questions I want to answer is which month had the most and least listings and the most and least sales. To do this, I will create a barplot using my barplot function.
+'''
+
+# Convert the List Date column to datetime format
+final_df.loc[:, "List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
+
+# Get the month from the List Date column
+final_df.loc[:, "Month"] = final_df["List Date"].dt.month
+
+# Group by Month and count the number of listings
+listings_per_month = final_df.groupby("Month").size().reset_index(name="Number of Listings")
+
+# Creates the barplot to see which month had the most and least listings
+barplot("Month", "Number of Listings", listings_per_month, "Number of Listings by Month")
+
+# Group by Month and count the number of sold properties
+month_group = sold_properties.groupby("Month").size().reset_index(name="Number of Sales")
+
+# Creates the barplot to see which month had the most and least sales
+barplot("Month", "Number of Sales", month_group, "Number of Sales by Month")
+
+'''
+Upon analyzing the first barplot, it shows that
+Upon analyzing the second barplot, it shows that September had the most sales (more than 600) while April had the least sales (less than 300).
 '''
