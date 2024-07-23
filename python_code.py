@@ -38,7 +38,7 @@ This means that missing price values are associated with canceled property listi
 Therefore, I can drop the 4 rows in the Price column that have nulls.
 '''
 
-# Creates a new data frame (clean_df) that contains no nulls in the Price column
+# Create a new data frame (clean_df) that contains no nulls in the Price column
 clean_df = df.dropna(subset = ["Price"])
 
 # Verify that there are no nulls in the Price column for the new data frame
@@ -61,7 +61,7 @@ columns = [
   "Days On Market"
 ]
 
-# Creates a new data frame (final_df) that contains only the needed columns using the clean data frame
+# Create a new data frame (final_df) that contains only the needed columns using the clean data frame
 final_df = clean_df[columns]
 
 # Verify that the number of columns is equal to the number of selected columns (8)
@@ -159,7 +159,7 @@ final_df.loc[:, "Month"] = final_df["List Date"].dt.month
 # Group by Month and count the number of listings
 listings_per_month = final_df.groupby("Month").size().reset_index(name="Number of Listings")
 
-# Creates the barplot to see which month had the most and least listings
+# Create the barplot to see which month had the most and least listings
 barplot("Month", "Number of Listings", listings_per_month, "Number of Listings by Month")
 
 '''
@@ -173,7 +173,7 @@ sold_properties = final_df[final_df["Status"]=="SOLD"].copy()
 # Group by Month and count the number of sold properties
 month_group = sold_properties.groupby("Month").size().reset_index(name="Number of Sales")
 
-# Creates the barplot to see which month had the most and least sales
+# Create the barplot to see which month had the most and least sales
 barplot("Month", "Number of Sales", month_group, "Number of Sales by Month")
 
 '''
