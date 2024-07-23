@@ -6,6 +6,7 @@ Date: 06/21/2024
 # Import the libraries
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import seaborn as sns
 
 # Load the data set into Python
@@ -19,7 +20,7 @@ df.tail()
 # Exploratory data analysis (EDA)
 df.shape #The shape function shows how many rows and columns the data set has.
 df.info() #The info() function shows the data type of each column.
-df.describe() #The describe() function shows summary statistics for numerical columns/quantitative data.
+df.describe() #The describe() function shows summary statistics for numerical columns.
 
 # Check for missing values
 df.isnull().sum()
@@ -39,7 +40,7 @@ Therefore, I can drop the 4 rows in the Price column that have nulls.
 '''
 
 # Create a new data frame (clean_df) that contains no nulls in the Price column
-clean_df = df.dropna(subset = ["Price"])
+clean_df = df.dropna(subset=["Price"])
 
 # Verify that there are no nulls in the Price column for the new data frame
 clean_df.isnull().sum()
@@ -70,8 +71,7 @@ final_df.shape
 # Verify that there are no nulls in the new dataframe
 final_df.isnull().sum()
 
-# Creates a function for scatterplots that will make data visualizations easier
-import matplotlib.ticker as ticker
+# Creates a function for scatterplots that allow for code reusability
 def scatterplot(x, y, d, title):
   '''
   This function creates a scatterplot that shows the relationship between two variables.
@@ -91,7 +91,7 @@ def scatterplot(x, y, d, title):
   plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
   plt.show()
 
-# Creates a function for barplots that will make visualizations easier
+# Creates a function for barplots that allow for code reusability
 def barplot(x, y, d, title):
   '''
   This function creates a barplot that shows the relationships between two variables.
@@ -163,7 +163,7 @@ listings_per_month = final_df.groupby("Month").size().reset_index(name="Number o
 barplot("Month", "Number of Listings", listings_per_month, "Number of Listings by Month")
 
 '''
-Upon analyzing the barplot, it shows that May had the most listings (around 1,000) while August had the least listings (less than 600).
+The barplot shows that May had the most listings (around 1,000) while August had the least listings (less than 600).
 The next question I want to answer is which month had the most and least sales.
 '''
 
@@ -177,7 +177,7 @@ month_group = sold_properties.groupby("Month").size().reset_index(name="Number o
 barplot("Month", "Number of Sales", month_group, "Number of Sales by Month")
 
 '''
-Upon analyzing the barplot, it shows that September had the most sales (more than 600) while April had the least sales (less than 300).
+The barplot shows that September had the most sales (more than 600) while April had the least sales (less than 300).
 The next question I want to answer is which district and property type has the most days on market.
 '''
 
@@ -194,5 +194,6 @@ ave_days_on_market = final_df.groupby("Type")["Days On Market"].mean().reset_ind
 barplot("Type", "Days On Market", ave_days_on_market, "Average Days on Market by Property Type")
 
 '''
-Upon analyzing the barplots, it shows that the Olowalu district (around 240) and Business property types (around 180) have the highest days on market.
+The barplots shows that the Olowalu district (around 240) and Business property types (around 180) have the highest days on market.
+The next question I want to answer is 
 '''
