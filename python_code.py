@@ -61,7 +61,7 @@ columns = [
   "Days On Market"
 ]
 
-# Creates a new data frame (final_df) that contains only the needed columns using the clean data frame.
+# Creates a new data frame (final_df) that contains only the needed columns using the clean data frame
 final_df = clean_df[columns]
 
 # Verify that the number of columns is equal to the number of selected columns (8)
@@ -161,6 +161,9 @@ Of the 1,400+ properties that sold in Kihei, 1,049 of them were Condos.
 The next questions I want to answer is which month had the most and least listings and the most and least sales. To do this, I will create a barplot using my barplot function.
 '''
 
+# Make a copy of the data frame
+final_df = final_df.copy()
+
 # Convert the List Date column to datetime format
 final_df.loc[:, "List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
 
@@ -173,6 +176,18 @@ listings_per_month = final_df.groupby("Month").size().reset_index(name="Number o
 # Creates the barplot to see which month had the most and least listings
 barplot("Month", "Number of Listings", listings_per_month, "Number of Listings by Month")
 
+# Make a copy of the data frame
+final_df = final_df.copy()
+
+# Convert the List Date column to datetime format
+final_df.loc[:, "List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
+
+# Get the month from the List Date column
+final_df.loc[:, "Month"] = final_df["List Date"].dt.month
+
+# Filter the Status column to include only sold properties
+sold_properties = final_df[final_df["Status"]=="SOLD"].copy()
+
 # Group by Month and count the number of sold properties
 month_group = sold_properties.groupby("Month").size().reset_index(name="Number of Sales")
 
@@ -180,6 +195,6 @@ month_group = sold_properties.groupby("Month").size().reset_index(name="Number o
 barplot("Month", "Number of Sales", month_group, "Number of Sales by Month")
 
 '''
-Upon analyzing the first barplot, it shows that
+Upon analyzing the first barplot, it shows that May had the most listings (around 1,000) while August had the least listings (less than 600).
 Upon analyzing the second barplot, it shows that September had the most sales (more than 600) while April had the least sales (less than 300).
 '''
