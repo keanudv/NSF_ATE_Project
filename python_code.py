@@ -195,5 +195,28 @@ barplot("Type", "Days On Market", ave_days_on_market, "Average Days on Market by
 
 '''
 The barplots shows that the Olowalu district (around 240) and Business property types (around 180) have the highest days on market.
-The next question I want to answer is 
+The next question I want to answer is which district and property type is the most affordable.
+'''
+
+# Group by District and calculate the average Price
+ave_price_by_district = final_df.groupby("District")["Price"].mean().reset_index()
+
+# Create the barplot to see which District is the most affordable
+barplot("District", "Price", ave_price_by_district, "Average Price by District")
+
+# Group by Type and calculate the average Price
+ave_price_by_type = final_df.groupby("Type")["Price"].mean().reset_index()
+
+# Create the barplot to see which property Type is the most affordable
+barplot("Type", "Price", ave_price_by_type, "Average Price by Property Type")
+
+'''
+The first barplot shows that the most affordable district is Molokai.
+The second barplot shows that the most affordable property type are:
+  1. Attached Ohana.
+  2. Commercial-Lease Land.
+  3. Commercial-Lease Unit.
+  4. Cottage.
+  5. House.
+  6. Other.
 '''
