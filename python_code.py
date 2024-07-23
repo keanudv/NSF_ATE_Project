@@ -91,23 +91,6 @@ def scatterplot(x, y, d, title):
   plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
   plt.show()
 
-# Creates a function for boxplots that will make visualizations easier
-def boxplot(x, y, d, title):
-  '''
-  This function creates a boxplot that shows the relationships between two variables.
-
-  Parameters:
-  Uses the same parameters as the scatterplot function.
-  '''
-  sns.boxplot(x=x, y=y, data=d)
-  plt.title(title, fontsize=20)
-  plt.xlabel(x, fontsize=14)
-  plt.xticks(rotation=75, ha="right", fontsize=8)
-  plt.subplots_adjust(bottom=0.3)
-  plt.ylabel(y, fontsize=14)
-  plt.gca().yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, p: format(int(y), ',')))
-  plt.show()
-
 # Creates a function for barplots that will make visualizations easier
 def barplot(x, y, d, title):
   '''
@@ -126,7 +109,7 @@ def barplot(x, y, d, title):
   plt.show()
 
 '''
-The first questions I want to answer is which district and property type had the most sales. To do this, I will create a barplot using my barplot function.
+The first questions I want to answer is which district and property type had the most sales.
 '''
 
 # Filter the Status column to include only sold properties
@@ -158,7 +141,7 @@ print(kihei_condo_count)
 
 '''
 Of the 1,400+ properties that sold in Kihei, 1,049 of them were Condos.
-The next questions I want to answer is which month had the most and least listings and the most and least sales. To do this, I will create a barplot using my barplot function.
+The next question I want to answer is which month had the most and least listings.
 '''
 
 # Make a copy of the data frame
@@ -175,6 +158,11 @@ listings_per_month = final_df.groupby("Month").size().reset_index(name="Number o
 
 # Creates the barplot to see which month had the most and least listings
 barplot("Month", "Number of Listings", listings_per_month, "Number of Listings by Month")
+
+'''
+Upon analyzing the barplot, it shows that May had the most listings (around 1,000) while August had the least listings (less than 600).
+The next question I want to answer is which month had the most and least sales.
+'''
 
 # Make a copy of the data frame
 final_df = final_df.copy()
@@ -195,6 +183,6 @@ month_group = sold_properties.groupby("Month").size().reset_index(name="Number o
 barplot("Month", "Number of Sales", month_group, "Number of Sales by Month")
 
 '''
-Upon analyzing the first barplot, it shows that May had the most listings (around 1,000) while August had the least listings (less than 600).
-Upon analyzing the second barplot, it shows that September had the most sales (more than 600) while April had the least sales (less than 300).
+Upon analyzing the barplot, it shows that September had the most sales (more than 600) while April had the least sales (less than 300).
+The next question I want to answer is which district and property type has the most days on market.
 '''
