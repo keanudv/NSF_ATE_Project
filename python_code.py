@@ -180,3 +180,19 @@ barplot("Month", "Number of Sales", month_group, "Number of Sales by Month")
 Upon analyzing the barplot, it shows that September had the most sales (more than 600) while April had the least sales (less than 300).
 The next question I want to answer is which district and property type has the most days on market.
 '''
+
+# Group by District and calculate the average Days On Market
+ave_days_on_market = final_df.groupby("District")["Days On Market"].mean().reset_index()
+
+# Create the barplot to see which District has the most days on market
+barplot("District", "Days On Market", ave_days_on_market, "Average Days on Market by District")
+
+# Group by Type and calculate the average Days On Market
+ave_days_on_market = final_df.groupby("Type")["Days On Market"].mean().reset_index()
+
+# Create the barplot to see which property Type has the most days on market
+barplot("Type", "Days On Market", ave_days_on_market, "Average Days on Market by Property Type")
+
+'''
+Upon analyzing the barplots, it shows that the Olowalu district (around 240) and Business property types (around 180) have the highest days on market.
+'''
