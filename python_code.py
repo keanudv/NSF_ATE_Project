@@ -148,16 +148,10 @@ The next question I want to answer is which month had the most and least listing
 final_df = final_df.copy()
 
 # Convert the List Date column to datetime format
-final_df.loc[:, "List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
+final_df["List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
 
 # Verify that the List Date column is in datetime format
 print(final_df["List Date"].dtype)
-
-'''
-If the List Date column is not converting to listdate formant, run the following code:
-
-final_df["List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
-'''
 
 # Get the month from the List Date column
 final_df.loc[:, "Month"] = final_df["List Date"].dt.month
@@ -172,15 +166,6 @@ barplot("Month", "Number of Listings", listings_per_month, "Number of Listings b
 Upon analyzing the barplot, it shows that May had the most listings (around 1,000) while August had the least listings (less than 600).
 The next question I want to answer is which month had the most and least sales.
 '''
-
-# Make a copy of the data frame
-final_df = final_df.copy()
-
-# Convert the List Date column to datetime format
-final_df.loc[:, "List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
-
-# Get the month from the List Date column
-final_df.loc[:, "Month"] = final_df["List Date"].dt.month
 
 # Filter the Status column to include only sold properties
 sold_properties = final_df[final_df["Status"]=="SOLD"].copy()
