@@ -150,6 +150,15 @@ final_df = final_df.copy()
 # Convert the List Date column to datetime format
 final_df.loc[:, "List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
 
+# Verify that the List Date column is in datetime format
+print(final_df["List Date"].dtype)
+
+'''
+If the List Date column is not converting to listdate formant, run the following code:
+
+final_df["List Date"] = pd.to_datetime(final_df["List Date"], errors="coerce")
+'''
+
 # Get the month from the List Date column
 final_df.loc[:, "Month"] = final_df["List Date"].dt.month
 
