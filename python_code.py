@@ -109,11 +109,27 @@ def barplot(x, y, d, title):
   plt.show()
 
 '''
-The first questions I want to answer is which district and property type had the most sales.
+First off, I want to see what was the cheapest and most expensive property that sold.
+To do this, I will sort the Status column to include only sold properties. Then, I will use the idxmin() and idxmax() function.
 '''
 
 # Filter the Status column to include only sold properties
 sold_properties = final_df[final_df["Status"]=="SOLD"]
+
+# Print the cheapest property that sold
+cheapest_property = sold_properties.loc[sold_properties["Price"].idxmin()]
+print(cheapest_property)
+
+# Print the most expensive property that sold
+most_expensive_property = sold_properties.loc[sold_properties["Price"].idxmax()]
+print(most_expensive_property)
+
+'''
+The cheapest property that sold was in Napili for $2,000.
+The most expensive property that sold was a single family home in Wailea/Makena for 38.5 million!
+Next, I want see which district and property type had the most sales.
+To do this, I will group by District and Type. Then, I will use my barplot function.
+'''
 
 # Group by District and count the number of sold properties
 district_group = sold_properties.groupby("District").size().reset_index(name="Number of Sales")
@@ -128,20 +144,22 @@ type_group = sold_properties.groupby("Type").size().reset_index(name="Number of 
 barplot("Type", "Number of Sales", type_group, "Number of Sales by Property Type")
 
 '''
-The barplots show that the Kihei district (more than 1,400) and Condo property types (more than 2,600) had the most sales.
+The district with the most sales is Kihei, more than 1,400 total sales.
+The property type with the most sales is Condos, more than 2,600 total sales.
 With this information, now I want to see how many of those Kihei sales were Condos.
 '''
 
 # Filter the sold properties to include only Condo properties that are located in Kihei
 kihei_condos = sold_properties[(sold_properties["District"]=="Kihei") & (sold_properties["Type"]=="Condo")]
 
-# Count the number of Kihei condo sales
+# Print the number of Kihei Condo sales
 kihei_condo_count = kihei_condos.shape[0]
 print(kihei_condo_count)
 
 '''
-Of the 1,400+ properties that sold in Kihei, 1,049 of them were Condos.
-The next question I want to answer is which month had the most and least listings.
+Of the 1,400 properties that sold in Kihei, 1,049 of them were Condos.
+Next, I want see which month had the most and least listings.
+To do this, I need to make a copy of the data frame because we need to modify the List Date column's datatype to datetime format. Then, I will group by month and use my barplot function.
 '''
 
 # Make a copy of the data frame
@@ -163,8 +181,10 @@ listings_per_month = final_df.groupby("Month").size().reset_index(name="Number o
 barplot("Month", "Number of Listings", listings_per_month, "Number of Listings by Month")
 
 '''
-The barplot shows that May had the most listings (around 1,000) while August had the least listings (less than 600).
-The next question I want to answer is which month had the most and least sales.
+The month with the most listings is May, around 1,000 listings.
+The month with the least amount of listings is August, around 500 listings.
+Next, I want to see which month had the most and least sales.
+To do this, I will make a copy of the sold_properties variable, group by month, then use my barplot function.
 '''
 
 # Filter the Status column to include only sold properties
@@ -177,25 +197,29 @@ month_group = sold_properties.groupby("Month").size().reset_index(name="Number o
 barplot("Month", "Number of Sales", month_group, "Number of Sales by Month")
 
 '''
-The barplot shows that September had the most sales (more than 600) while April had the least sales (less than 300).
-The next question I want to answer is which district and property type has the most days on market.
+The month with the most sales is September, around 600 sales.
+The month with the least amount of sales is April, around 300 sales.
+Next, I want to see which district and property type had the most days on market.
+To do this, I will group by District and Type, calculate the average days on market, then use my barplot function.
 '''
 
 # Group by District and calculate the average Days On Market
 ave_days_on_market = final_df.groupby("District")["Days On Market"].mean().reset_index()
 
-# Create the barplot to see which District has the most days on market
+# Create the barplot to see which District had the most days on market
 barplot("District", "Days On Market", ave_days_on_market, "Average Days on Market by District")
 
 # Group by Type and calculate the average Days On Market
 ave_days_on_market = final_df.groupby("Type")["Days On Market"].mean().reset_index()
 
-# Create the barplot to see which property Type has the most days on market
+# Create the barplot to see which property Type had the most days on market
 barplot("Type", "Days On Market", ave_days_on_market, "Average Days on Market by Property Type")
 
 '''
-The barplots shows that the Olowalu district (around 240) and Business property types (around 180) have the highest days on market.
-The next question I want to answer is which district and property type is the most affordable.
+The district that had the highest days on market is Olowalu, around 240 days.
+The property type that had the highest days on market is business, around 180 days.
+Next, I want to see which district and property type is the most affordable.
+To do this, I will group by District and Type, calculate the average price, then use my barplot function.
 '''
 
 # Group by District and calculate the average Price
@@ -211,8 +235,8 @@ ave_price_by_type = final_df.groupby("Type")["Price"].mean().reset_index()
 barplot("Type", "Price", ave_price_by_type, "Average Price by Property Type")
 
 '''
-The first barplot shows that the most affordable district is Molokai.
-The second barplot shows that the most affordable property type are:
+The most affordable district is Molokai.
+The most affordable property type is:
   1. Attached Ohana.
   2. Commercial-Lease Land.
   3. Commercial-Lease Unit.
