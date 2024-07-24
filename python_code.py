@@ -127,14 +127,14 @@ print(most_expensive_property)
 '''
 The cheapest property that sold was in Napili for $2,000.
 The most expensive property that sold was a single family home in Wailea/Makena for 38.5 million!
-Next, I want see which district and property type had the most sales.
+Next, I want see which District and property type had the most sales.
 To do this, I will group by District and Type. Then, I will use my barplot function.
 '''
 
 # Group by District and count the number of sold properties
 district_group = sold_properties.groupby("District").size().reset_index(name="Number of Sales")
 
-# Create the barplot to see which district had the most sales
+# Create the barplot to see which District had the most sales
 barplot("District", "Number of Sales", district_group, "Number of Sales by District")
 
 # Group by Type and count the number of sold properties
@@ -144,12 +144,13 @@ type_group = sold_properties.groupby("Type").size().reset_index(name="Number of 
 barplot("Type", "Number of Sales", type_group, "Number of Sales by Property Type")
 
 '''
-The district with the most sales is Kihei, more than 1,400 total sales.
+The District with the most sales is Kihei, more than 1,400 total sales.
 The property type with the most sales is Condos, more than 2,600 total sales.
 With this information, now I want to see how many of those Kihei sales were Condos.
+To do this, I will filter the sold properties to include only Kihei Condos.
 '''
 
-# Filter the sold properties to include only Condo properties that are located in Kihei
+# Filter the sold properties to include only Kihei Condos
 kihei_condos = sold_properties[(sold_properties["District"]=="Kihei") & (sold_properties["Type"]=="Condo")]
 
 # Print the number of Kihei Condo sales
@@ -187,7 +188,7 @@ Next, I want to see which month had the most and least sales.
 To do this, I will make a copy of the sold_properties variable, group by month, then use my barplot function.
 '''
 
-# Filter the Status column to include only sold properties
+# Make a copy of the sold_properties variable
 sold_properties = final_df[final_df["Status"]=="SOLD"].copy()
 
 # Group by Month and count the number of sold properties
@@ -197,28 +198,28 @@ month_group = sold_properties.groupby("Month").size().reset_index(name="Number o
 barplot("Month", "Number of Sales", month_group, "Number of Sales by Month")
 
 '''
-The month with the most sales is September, around 600 sales.
-The month with the least amount of sales is April, around 300 sales.
-Next, I want to see which district and property type had the most days on market.
+The month with the most sales is September, around 600 total sales.
+The month with the least amount of sales is April, around 300 total sales.
+Next, I want to see which District and property type had the most days on market.
 To do this, I will group by District and Type, calculate the average days on market, then use my barplot function.
 '''
 
-# Group by District and calculate the average Days On Market
+# Group by District and calculate the average days on market
 ave_days_on_market = final_df.groupby("District")["Days On Market"].mean().reset_index()
 
 # Create the barplot to see which District had the most days on market
 barplot("District", "Days On Market", ave_days_on_market, "Average Days on Market by District")
 
-# Group by Type and calculate the average Days On Market
+# Group by Type and calculate the average days on market
 ave_days_on_market = final_df.groupby("Type")["Days On Market"].mean().reset_index()
 
-# Create the barplot to see which property Type had the most days on market
+# Create the barplot to see which property type had the most days on market
 barplot("Type", "Days On Market", ave_days_on_market, "Average Days on Market by Property Type")
 
 '''
-The district that had the highest days on market is Olowalu, around 240 days.
-The property type that had the highest days on market is business, around 180 days.
-Next, I want to see which district and property type is the most affordable.
+The District that had the most days on market is Olowalu, around 240 days.
+The property type that had the most days on market is business, around 180 days.
+Next, I want to see which District and property type is the most affordable.
 To do this, I will group by District and Type, calculate the average price, then use my barplot function.
 '''
 
@@ -231,11 +232,11 @@ barplot("District", "Price", ave_price_by_district, "Average Price by District")
 # Group by Type and calculate the average Price
 ave_price_by_type = final_df.groupby("Type")["Price"].mean().reset_index()
 
-# Create the barplot to see which property Type is the most affordable
+# Create the barplot to see which property type is the most affordable
 barplot("Type", "Price", ave_price_by_type, "Average Price by Property Type")
 
 '''
-The most affordable district is Molokai.
+The most affordable District is Molokai.
 The most affordable property type is:
   1. Attached Ohana.
   2. Commercial-Lease Land.
