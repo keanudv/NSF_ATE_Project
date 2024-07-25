@@ -266,6 +266,6 @@ corr_coe = final_df["Original Price"].corr(final_df["Price"])
 print(corr_coe)
 
 '''
-The correlation coefficient between the Original Price and Price is 0.1829631425515774
-Because the correlation coefficient is close to 0, this means that there is no correlation between the Original Price and Price variables.
+The correlation coefficient between the Original Price and Price is 0.1829631425515774.
+Because the correlation coefficient is close to 0, there is no correlation between the Original Price and Price variables.
 '''
