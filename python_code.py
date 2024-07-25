@@ -244,4 +244,28 @@ The most affordable property type is:
   4. Cottage.
   5. House.
   6. Other.
+Lastly, I want to see if there is a correlation between the Original Price and Price (new list price) variables.
+To do this, I will use my scatterplot function.
+'''
+
+# Create the scatterplot to see the correlation between Original Price and Price
+scatterplot("Original Price", "Price", final_df, "Original Price vs. New List Price")
+
+'''
+It seems like there is a correlation between the Original Price and Price variables. However, there is a significant outlier.
+To verify whether there is a correlation, I must calculate the correlation coefficient.
+
+Correlation Coefficient:
+1: Strong positive correlation.
+0: No/weak correlation.
+-1: Strong negative correlation.
+'''
+
+# Print the correlation coefficient
+corr_coe = final_df["Original Price"].corr(final_df["Price"])
+print(corr_coe)
+
+'''
+The correlation coefficient between the Original Price and Price is 0.1829631425515774
+Because the correlation coefficient is close to 0, this means that there is no correlation between the Original Price and Price variables.
 '''
